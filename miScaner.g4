@@ -27,6 +27,19 @@ END     : 'end';
 CONST   : 'const';
 VAR     : 'var';
 
+INT-LITERAL = 
+
+REAL-LITERAL = DIGIT (DIGIT)*'.'(DIGIT)*
+
+BOOL-LITERAL   : 'true' | 'false'
+STRING-LITERAL : '"' (PRINTABLE)* '"'; 
+
+PRINTABLE   :  DIGIT | LETTER | '' | '!' | '"' | '#' | '$' | '%' | '&'
+                    | ''' | '(' | ')' | '*' | '+' |',' | '-' | '.' | '/' | ':' | ';'
+                    | '<'| '=' | '>' | '?' | '@' | '[' | '\' | ']' | '^' | '_' | '`'
+                    | '{' | '|' | '}' | '~' ;
+
+
 ID : LETTER (LETTER|DIGIT)* ;
 NUM : DIGIT DIGIT* ;
 
