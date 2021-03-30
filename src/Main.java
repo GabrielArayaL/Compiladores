@@ -1,13 +1,13 @@
 import generated.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
-import sun.rmi.transport.proxy.RMIHttpToPortSocketFactory;
 
 import javax.swing.*;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.InputMismatchException;
 
 public class Main {
     public static void main(String[] args){
@@ -26,9 +26,24 @@ public class Main {
             tokens = new CommonTokenStream(inst);
             parser = new miParser(tokens);
 
-            tree = parser.program();
+            try {
+               tree = parser.program();
 
-            System.out.println("Compilación Exitosa !! \n");
+            } catch (InputMismatchException e) {
+                System.out.print(e.getMessage()); //try to find out specific reason.
+                System.out.println("Compilación Exitosa !! \n");
+
+            }
+            //tree = parser.program();
+            //System.out.println(parser.program());
+            //System.out.println(parser.actualParms().getText());
+            //System.out.println(tree.getText());
+            //System.out.println(tree.getParent());
+            //System.out.println("Compilación Exitosa !! \n");
+
+
+
+            //System.out.println("Compilación Exitosa !! \n");
 
             //java.util.concurrent.Future<JFrame> treeGUI = org.antlr.v4.gui.Trees.inspect(tree, parser);
             //treeGUI.get().setVisible(true);
