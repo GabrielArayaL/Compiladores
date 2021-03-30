@@ -13,3 +13,13 @@ HGHGHGHG
 true
 
 |
+
+new
+
+class
+print
+return
+
+length
+
+x;

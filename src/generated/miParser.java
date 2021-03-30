@@ -1,4 +1,5 @@
 // Generated from C:/Users/gabri/OneDrive/Documents/Compiladores/Proyectos/Proyecto Compiladores\miParser.g4 by ANTLR 4.9.1
+package generated;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
