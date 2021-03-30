@@ -1,4 +1,25 @@
 begin
-   x := 10;
-   print(x+1)
+    x := 10;
+    print(x+1)
+
 end
+
+
+{
+
+HGHGHGHG
+}
+
+true
+
+|
+
+new
+
+class
+print
+return
+
+length
+
+x;
