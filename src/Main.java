@@ -1,13 +1,13 @@
 import generated.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
-import sun.rmi.transport.proxy.RMIHttpToPortSocketFactory;
 
 import javax.swing.*;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.InputMismatchException;
 
 public class Main {
     public static void main(String[] args){
@@ -20,33 +20,45 @@ public class Main {
 
         CharStream input=null;
         CommonTokenStream tokens = null;
+        MyErrorListener errorListener = null;
         try {
             input = CharStreams.fromFileName("test.txt");
             inst = new miScanner(input);
             tokens = new CommonTokenStream(inst);
             parser = new miParser(tokens);
 
-            tree = parser.program();
+            errorListener = new MyErrorListener();
 
-            System.out.println("Compilación Exitosa !! \n");
+            inst.removeErrorListeners();
+            inst.addErrorListener( errorListener );
 
-            //java.util.concurrent.Future<JFrame> treeGUI = org.antlr.v4.gui.Trees.inspect(tree, parser);
-            //treeGUI.get().setVisible(true);
+            parser.removeErrorListeners();
+            parser.addErrorListener ( errorListener );
 
-        }/*
-        catch(InterruptedException e){
-            e.printStackTrace();
+            try {
+               tree = parser.program();
+
+            }catch(RecognitionException e){
+                System.out.println("Error!!!");
+                e.printStackTrace();
+            }
+
+            if (!errorListener.hasErrors()) {
+                System.out.println("Compilación Exitosa!!\n");
+                java.util.concurrent.Future<JFrame> treeGUI = org.antlr.v4.gui.Trees.inspect(tree, parser);
+                treeGUI.get().setVisible(true);
+            }
+            else {
+                System.out.println("Compilación Fallida!!\n");
+                System.out.println(errorListener.toString());
+            }
+
         }
-        catch(ExecutionException e){
-            e.printStackTrace();
-        }*/
-        catch(IOException e){
+        catch(IOException | InterruptedException | ExecutionException e){
             e.printStackTrace();
         }
 
     }
-
-
 }
 
 /*
