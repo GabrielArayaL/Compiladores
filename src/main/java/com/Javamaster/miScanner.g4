@@ -5,6 +5,12 @@ PyCOMA  : ';' ;
 ASSIGN  : ':=';
 IGUAL   : '=';
 PIZQ    : '(';
+
+
+
+
+
+
 PDER    : ')';
 VIR     : '~';
 DOSPUN  : ':';
@@ -22,6 +28,8 @@ DOBIGUAL: '==';
 DIFERENTE:'!=';
 ADMIRACION: '!';
 NUMERAL:  '#';
+
+
 DOLAR:  '$';
 PORCENTAJE:  '%';
 AMPERSAND:'&';
