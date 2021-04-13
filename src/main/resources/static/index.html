@@ -20,7 +20,7 @@
 
 <script type="text/javascript">
     function viewData(){
-       document.getElementById("consoleBox").innerHTML = $.get("http://localhost:8080/program/"document.getElementById("textBox").innerHTML, function(data,status){
+       document.getElementById("consoleBox").innerHTML = $.get("http://localhost:8080/program/"+document.getElementById("textBox").innerHTML+, function(data,status){
         console.log("entre al host");
         });
     }
