@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Widget de Combo informativo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<form id="text">
+    <div id="textBox" contenteditable="true"><p id="textoP"></p></div>
+</form>
+<form id="console">
+    <div style="color:rgba(251, 252, 252);" id="consoleBox" contenteditable="false"><p id="consoleP"></p></div>
+</form>
+
+<script type="text/javascript">
+    function viewData(){
+       document.getElementById("consoleBox").innerHTML = $.get("http://localhost:8080/program/"document.getElementById("textBox").innerHTML, function(data,status){
+        console.log("entre al host");
+        });
+    }
+
+</script>
+
+<input id="btn" type="button" onclick="viewData();" value="Run">
+
+</body>
+</html>

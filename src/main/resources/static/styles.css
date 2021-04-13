@@ -1,0 +1,33 @@
+
+body{
+background-color:lightgray;
+
+}
+
+#textBox {
+    width: 540px;
+    height: 300px;
+    border: 1px #000000 solid;
+    padding: 12px;
+    overflow: scroll;
+    background-color: floralwhite;
+}
+
+#consoleBox{
+    background-color:black;
+    width: 540px;
+    height:150px;
+    border: 1px #000000 solid;
+    padding: 12px;
+    overflow: scroll;
+    position: relative;
+
+}
+#btn{
+    top: -501px;
+    left: 567px;
+    position:relative;
+    background-color:forestgreen
+
+}
+
