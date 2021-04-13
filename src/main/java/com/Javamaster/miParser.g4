@@ -6,7 +6,11 @@ options {
     tokenVocab = miScanner;
 }
 
+
+
 program : statement EOF;
+
+
 
 statement   : variableDecl PYCOMA
             | classDecl PYCOMA
