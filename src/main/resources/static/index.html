@@ -14,34 +14,27 @@
 
 <body>
 
-<<<<<<< HEAD
+<form id="text">
+    <div id="textBox" contenteditable="true">
+        <p id="textoP"></p>
+    </div>
+    <div style="color:rgba(251, 252, 252);" id="consoleBox" contenteditable="false">
+        <p id="consoleP"></p>
+    </div>
+</form>
+<!-- <form id="console">
+    <div style="color:rgba(251, 252, 252);" id="consoleBox" contenteditable="false">
+        <p id="consoleP"></p>
+    </div>
+</form> -->
+<input id="btn" type="button" onclick="viewData();" value="Run">
 <script type="text/javascript">
-    function viewData(){
-       document.getElementById("consoleBox").innerHTML = $.get("http://localhost:8080/program/"+document.getElementById("textBox").innerHTML+, function(data,status){
-        console.log("entre al host");
-        });
-    }
-=======
-    <form id="text">
-        <div id="textBox" contenteditable="true">
-            <p id="textoP"></p>
-        </div>
-        <div style="color:rgba(251, 252, 252);" id="consoleBox" contenteditable="false">
-            <p id="consoleP"></p>
-        </div>
-    </form>
-    <!-- <form id="console">
-        <div style="color:rgba(251, 252, 252);" id="consoleBox" contenteditable="false">
-            <p id="consoleP"></p>
-        </div>
-    </form> -->
-    <input id="btn" type="button" onclick="viewData();" value="Run">
-    <script type="text/javascript">
         function viewData() {
->>>>>>> ad65526d28901c41d94cba21c8d1e866a1f4acfb
 
+        var texto= document.getElementById('textBox').innerText;
+            console.log(texto);
             document.getElementById("consoleP").innerHTML =
-                $.get(`http://localhost:8080/program/document.getElementById("textoP").innerHTML`, function (data, status) {
+                $.post(`http://localhost:8080/program`, function (data, status) {
                     console.log("entre al host 2");
                     console.log(status);
                     console.log("Data: " +data);

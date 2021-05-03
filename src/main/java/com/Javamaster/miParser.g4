@@ -8,7 +8,7 @@ options {
 
 
 
-program : statement EOF;
+program : (statement)* EOF;
 
 
 
@@ -52,12 +52,12 @@ type : simpleType
       | identifier;
 
 
-simpleType:  BOOL
-            | CHAR
-            | INT
-            | STRING;
+simpleType:  BOOLEAN
+            | CHAR2
+            | INT2
+            | STRING2;
 
-arrayType: simpleType  PIZQ PDER ;
+arrayType: simpleType  CORIZQ CORDER ;
 
 
 assignment: identifier(PUNTO identifier)? IGUAL expression;
@@ -91,8 +91,6 @@ unary:  (SUM|SUB|ADMIRACION)(expression)*;
 
 allocationExpression:   NEW identifier PIZQ PDER;
 
-arrayAllocation:    NEW simpleType CORIZQ expression CORDER;
-
 arrayAllocationExpression:  NEW simpleType CORIZQ expression CORDER;
 
 subExpression:  PIZQ expression PDER;
@@ -102,7 +100,7 @@ functionCall:   identifier PIZQ(actualParms)?PDER;
 
 actualParms:    expression (COMA expression)*;
 
-arrayLookup:    identifier COMILLA(expression)?COMILLA;
+arrayLookup:    identifier CORIZQ(expression)CORDER;
 
 arrayLength:    identifier PUNTO LENGTH;
 
@@ -134,7 +132,7 @@ stringLiteral:  COMILLA(printable)*COMILLA;
 
 printable:    DIGIT
             | LETTER
-            | PyCOMA
+            | PYCOMA
             | ASSIGN
             | IGUAL
             | PIZQ
@@ -170,4 +168,6 @@ printable:    DIGIT
             | LLAVEIZQ
             | LLAVEDER
             | OR;
+
+
 

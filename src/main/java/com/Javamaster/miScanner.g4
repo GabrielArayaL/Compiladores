@@ -1,14 +1,10 @@
 lexer grammar miScanner;
 
 //símbolos
-PyCOMA  : ';' ;
+PYCOMA  : ';' ;
 ASSIGN  : ':=';
 IGUAL   : '=';
 PIZQ    : '(';
-
-
-
-
 
 
 PDER    : ')';
@@ -48,7 +44,7 @@ OR:'|';
 
 
 //palabras reservadas
-BOOL    : 'true' | 'false' ;
+BOOLEAN : 'boolean' ;
 IF      : 'if' ;
 WHILE   : 'while' ;
 LET     : 'let';
@@ -67,14 +63,18 @@ NEW     :'new';
 CLASS   :'class';
 PRINT   :'print';
 RETURN  :'return';
+STRING2 :'String';
+CHAR2   :'char';
+INT2    :'int';
+PUBLIC  :'public';
 
 CHAR: COMILLA(LETTER|DIGIT)COMILLA;
 STRING: COMILLA(LETTER|DIGIT)*COMILLA;
 INT : [0-9]+;
 ID : LETTER (LETTER|DIGIT)* ;
 NUM : DIGIT DIGIT* ;
-fragment LETTER : 'a'..'z' | 'A'..'Z';
-fragment DIGIT : '0'..'9' ;
+LETTER : 'a'..'z' | 'A'..'Z';
+DIGIT : '0'..'9' ;
 
 COMMENT : '<!--' .*? '-->' ;
 WS  :   [ \t\n\r]+ -> skip ;
