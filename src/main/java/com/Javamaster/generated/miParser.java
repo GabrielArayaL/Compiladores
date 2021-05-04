@@ -25,8 +25,7 @@ public class miParser extends Parser {
 		LLAVEDER=35, OR=36, BOOLEAN=37, IF=38, WHILE=39, LET=40, THEN=41, ELSE=42, 
 		IN=43, DO=44, BEGIN=45, END=46, CONST=47, VAR=48, TRUE=49, FALSE=50, LENGTH=51, 
 		NEW=52, CLASS=53, PRINT=54, RETURN=55, STRING2=56, CHAR2=57, INT2=58, 
-		PUBLIC=59, CHAR=60, STRING=61, INT=62, ID=63, NUM=64, LETTER=65, DIGIT=66, 
-		COMMENT=67, WS=68;
+		PUBLIC=59, LETTER=60, DIGIT=61, COMMENT=62, WS=63;
 	public static final int
 		RULE_program = 0, RULE_statement = 1, RULE_block = 2, RULE_functionDecl = 3, 
 		RULE_formalParams = 4, RULE_formalParam = 5, RULE_whileStatement = 6, 
@@ -75,8 +74,8 @@ public class miParser extends Parser {
 			"CORIZQ", "CORDER", "BACKSLASH", "CIRCUNFLEJO", "GUIONBAJO", "LLAVEIZQ", 
 			"LLAVEDER", "OR", "BOOLEAN", "IF", "WHILE", "LET", "THEN", "ELSE", "IN", 
 			"DO", "BEGIN", "END", "CONST", "VAR", "TRUE", "FALSE", "LENGTH", "NEW", 
-			"CLASS", "PRINT", "RETURN", "STRING2", "CHAR2", "INT2", "PUBLIC", "CHAR", 
-			"STRING", "INT", "ID", "NUM", "LETTER", "DIGIT", "COMMENT", "WS"
+			"CLASS", "PRINT", "RETURN", "STRING2", "CHAR2", "INT2", "PUBLIC", "LETTER", 
+			"DIGIT", "COMMENT", "WS"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -154,7 +153,7 @@ public class miParser extends Parser {
 			setState(83);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (((((_la - 33)) & ~0x3f) == 0 && ((1L << (_la - 33)) & ((1L << (GUIONBAJO - 33)) | (1L << (LLAVEIZQ - 33)) | (1L << (BOOLEAN - 33)) | (1L << (IF - 33)) | (1L << (WHILE - 33)) | (1L << (CLASS - 33)) | (1L << (PRINT - 33)) | (1L << (RETURN - 33)) | (1L << (STRING2 - 33)) | (1L << (CHAR2 - 33)) | (1L << (INT2 - 33)) | (1L << (LETTER - 33)))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << GUIONBAJO) | (1L << LLAVEIZQ) | (1L << BOOLEAN) | (1L << IF) | (1L << WHILE) | (1L << CLASS) | (1L << PRINT) | (1L << RETURN) | (1L << STRING2) | (1L << CHAR2) | (1L << INT2) | (1L << LETTER))) != 0)) {
 				{
 				{
 				setState(80);
@@ -347,7 +346,7 @@ public class miParser extends Parser {
 			setState(116);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (((((_la - 33)) & ~0x3f) == 0 && ((1L << (_la - 33)) & ((1L << (GUIONBAJO - 33)) | (1L << (LLAVEIZQ - 33)) | (1L << (BOOLEAN - 33)) | (1L << (IF - 33)) | (1L << (WHILE - 33)) | (1L << (CLASS - 33)) | (1L << (PRINT - 33)) | (1L << (RETURN - 33)) | (1L << (STRING2 - 33)) | (1L << (CHAR2 - 33)) | (1L << (INT2 - 33)) | (1L << (LETTER - 33)))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << GUIONBAJO) | (1L << LLAVEIZQ) | (1L << BOOLEAN) | (1L << IF) | (1L << WHILE) | (1L << CLASS) | (1L << PRINT) | (1L << RETURN) | (1L << STRING2) | (1L << CHAR2) | (1L << INT2) | (1L << LETTER))) != 0)) {
 				{
 				{
 				setState(113);
@@ -410,7 +409,7 @@ public class miParser extends Parser {
 			setState(125);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 33)) & ~0x3f) == 0 && ((1L << (_la - 33)) & ((1L << (GUIONBAJO - 33)) | (1L << (BOOLEAN - 33)) | (1L << (STRING2 - 33)) | (1L << (CHAR2 - 33)) | (1L << (INT2 - 33)) | (1L << (LETTER - 33)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << GUIONBAJO) | (1L << BOOLEAN) | (1L << STRING2) | (1L << CHAR2) | (1L << INT2) | (1L << LETTER))) != 0)) {
 				{
 				setState(124);
 				formalParams();
@@ -1632,7 +1631,7 @@ public class miParser extends Parser {
 			setState(278);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if (((((_la - 4)) & ~0x3f) == 0 && ((1L << (_la - 4)) & ((1L << (PIZQ - 4)) | (1L << (SUM - 4)) | (1L << (SUB - 4)) | (1L << (COMILLA - 4)) | (1L << (ADMIRACION - 4)) | (1L << (PUNTO - 4)) | (1L << (GUIONBAJO - 4)) | (1L << (TRUE - 4)) | (1L << (FALSE - 4)) | (1L << (NEW - 4)) | (1L << (LETTER - 4)) | (1L << (DIGIT - 4)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PIZQ) | (1L << SUM) | (1L << SUB) | (1L << COMILLA) | (1L << ADMIRACION) | (1L << PUNTO) | (1L << GUIONBAJO) | (1L << TRUE) | (1L << FALSE) | (1L << NEW) | (1L << LETTER) | (1L << DIGIT))) != 0)) {
 				{
 				setState(277);
 				actualParms();
@@ -1959,7 +1958,7 @@ public class miParser extends Parser {
 					{
 					setState(306);
 					_la = _input.LA(1);
-					if ( !(((((_la - 33)) & ~0x3f) == 0 && ((1L << (_la - 33)) & ((1L << (GUIONBAJO - 33)) | (1L << (LETTER - 33)) | (1L << (DIGIT - 33)))) != 0)) ) {
+					if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << GUIONBAJO) | (1L << LETTER) | (1L << DIGIT))) != 0)) ) {
 					_errHandler.recoverInline(this);
 					}
 					else {
@@ -2353,7 +2352,7 @@ public class miParser extends Parser {
 			{
 			setState(360);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PYCOMA) | (1L << ASSIGN) | (1L << IGUAL) | (1L << PIZQ) | (1L << PDER) | (1L << VIR) | (1L << DOSPUN) | (1L << SUM) | (1L << SUB) | (1L << MUL) | (1L << DIV) | (1L << COMILLA) | (1L << COMILLAD) | (1L << MAYOR) | (1L << MENOR) | (1L << MAYORI) | (1L << MENORI) | (1L << DOBIGUAL) | (1L << DIFERENTE) | (1L << ADMIRACION) | (1L << NUMERAL) | (1L << DOLAR) | (1L << PORCENTAJE) | (1L << AMPERSAND) | (1L << COMA) | (1L << PUNTO) | (1L << SIGPREGUNTA) | (1L << ARROBA) | (1L << CORIZQ) | (1L << CORDER) | (1L << BACKSLASH) | (1L << CIRCUNFLEJO) | (1L << GUIONBAJO) | (1L << LLAVEIZQ) | (1L << LLAVEDER) | (1L << OR))) != 0) || _la==LETTER || _la==DIGIT) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << PYCOMA) | (1L << ASSIGN) | (1L << IGUAL) | (1L << PIZQ) | (1L << PDER) | (1L << VIR) | (1L << DOSPUN) | (1L << SUM) | (1L << SUB) | (1L << MUL) | (1L << DIV) | (1L << COMILLA) | (1L << COMILLAD) | (1L << MAYOR) | (1L << MENOR) | (1L << MAYORI) | (1L << MENORI) | (1L << DOBIGUAL) | (1L << DIFERENTE) | (1L << ADMIRACION) | (1L << NUMERAL) | (1L << DOLAR) | (1L << PORCENTAJE) | (1L << AMPERSAND) | (1L << COMA) | (1L << PUNTO) | (1L << SIGPREGUNTA) | (1L << ARROBA) | (1L << CORIZQ) | (1L << CORDER) | (1L << BACKSLASH) | (1L << CIRCUNFLEJO) | (1L << GUIONBAJO) | (1L << LLAVEIZQ) | (1L << LLAVEDER) | (1L << OR) | (1L << LETTER) | (1L << DIGIT))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -2375,7 +2374,7 @@ public class miParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3F\u016d\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3A\u016d\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -2403,8 +2402,8 @@ public class miParser extends Parser {
 		"\13&\3&\3&\3&\7&\u0159\n&\f&\16&\u015c\13&\5&\u015e\n&\3\'\3\'\3(\3(\7"+
 		"(\u0164\n(\f(\16(\u0167\13(\3(\3(\3)\3)\3)\2\2*\2\4\6\b\n\f\16\20\22\24"+
 		"\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJLNP\2\13\4\2\'\':<\4\2\n"+
-		"\13\26\26\3\2\20\25\4\2\n\13&&\4\2\f\r\32\32\4\2##CC\4\2##CD\3\2\63\64"+
-		"\4\2\3&CD\2\u0171\2U\3\2\2\2\4p\3\2\2\2\6r\3\2\2\2\b{\3\2\2\2\n\u0084"+
+		"\13\26\26\3\2\20\25\4\2\n\13&&\4\2\f\r\32\32\4\2##>>\4\2##>?\3\2\63\64"+
+		"\4\2\3&>?\2\u0171\2U\3\2\2\2\4p\3\2\2\2\6r\3\2\2\2\b{\3\2\2\2\n\u0084"+
 		"\3\2\2\2\f\u008c\3\2\2\2\16\u008f\3\2\2\2\20\u0095\3\2\2\2\22\u009e\3"+
 		"\2\2\2\24\u00a1\3\2\2\2\26\u00a4\3\2\2\2\30\u00af\3\2\2\2\32\u00b5\3\2"+
 		"\2\2\34\u00be\3\2\2\2\36\u00c0\3\2\2\2 \u00c2\3\2\2\2\"\u00c6\3\2\2\2"+
@@ -2481,14 +2480,14 @@ public class miParser extends Parser {
 		"\2\2\u0137\u0135\3\2\2\2\u0137\u0138\3\2\2\2\u0138E\3\2\2\2\u0139\u0137"+
 		"\3\2\2\2\u013a\u013f\5H%\2\u013b\u013f\5J&\2\u013c\u013f\5L\'\2\u013d"+
 		"\u013f\5N(\2\u013e\u013a\3\2\2\2\u013e\u013b\3\2\2\2\u013e\u013c\3\2\2"+
-		"\2\u013e\u013d\3\2\2\2\u013fG\3\2\2\2\u0140\u0144\7D\2\2\u0141\u0143\7"+
-		"D\2\2\u0142\u0141\3\2\2\2\u0143\u0146\3\2\2\2\u0144\u0142\3\2\2\2\u0144"+
-		"\u0145\3\2\2\2\u0145I\3\2\2\2\u0146\u0144\3\2\2\2\u0147\u014b\7D\2\2\u0148"+
-		"\u014a\7D\2\2\u0149\u0148\3\2\2\2\u014a\u014d\3\2\2\2\u014b\u0149\3\2"+
+		"\2\u013e\u013d\3\2\2\2\u013fG\3\2\2\2\u0140\u0144\7?\2\2\u0141\u0143\7"+
+		"?\2\2\u0142\u0141\3\2\2\2\u0143\u0146\3\2\2\2\u0144\u0142\3\2\2\2\u0144"+
+		"\u0145\3\2\2\2\u0145I\3\2\2\2\u0146\u0144\3\2\2\2\u0147\u014b\7?\2\2\u0148"+
+		"\u014a\7?\2\2\u0149\u0148\3\2\2\2\u014a\u014d\3\2\2\2\u014b\u0149\3\2"+
 		"\2\2\u014b\u014c\3\2\2\2\u014c\u014e\3\2\2\2\u014d\u014b\3\2\2\2\u014e"+
-		"\u0152\7\34\2\2\u014f\u0151\7D\2\2\u0150\u014f\3\2\2\2\u0151\u0154\3\2"+
+		"\u0152\7\34\2\2\u014f\u0151\7?\2\2\u0150\u014f\3\2\2\2\u0151\u0154\3\2"+
 		"\2\2\u0152\u0150\3\2\2\2\u0152\u0153\3\2\2\2\u0153\u015e\3\2\2\2\u0154"+
-		"\u0152\3\2\2\2\u0155\u0156\7\34\2\2\u0156\u015a\7D\2\2\u0157\u0159\7D"+
+		"\u0152\3\2\2\2\u0155\u0156\7\34\2\2\u0156\u015a\7?\2\2\u0157\u0159\7?"+
 		"\2\2\u0158\u0157\3\2\2\2\u0159\u015c\3\2\2\2\u015a\u0158\3\2\2\2\u015a"+
 		"\u015b\3\2\2\2\u015b\u015e\3\2\2\2\u015c\u015a\3\2\2\2\u015d\u0147\3\2"+
 		"\2\2\u015d\u0155\3\2\2\2\u015eK\3\2\2\2\u015f\u0160\t\t\2\2\u0160M\3\2"+

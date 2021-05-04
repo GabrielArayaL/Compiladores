@@ -110,6 +110,7 @@ additiveOp: SUM|SUB|OR;
 
 multiplicativeOp: MUL|DIV|AMPERSAND;
 
+//identifier: ID;
 identifier: (GUIONBAJO|LETTER)(GUIONBAJO|LETTER|DIGIT)*;
 
 literal: intLiteral

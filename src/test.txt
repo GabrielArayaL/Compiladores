@@ -1,1 +1,1 @@
-boolean var;
+boolean _var;

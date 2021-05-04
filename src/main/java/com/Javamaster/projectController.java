@@ -2,7 +2,6 @@ package com.Javamaster;
 
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 
 @RestController
 public class projectController {
@@ -11,9 +10,8 @@ public class projectController {
 
 
     @PostMapping("/program")
-    public String program(@RequestBody String body) throws IOException {
-        //return project_service.main(body);
-        return project_service.main2();
+    public String program(@RequestBody String body){
+        return project_service.main(body);
     }
 
 }

@@ -68,14 +68,14 @@ CHAR2   :'char';
 INT2    :'int';
 PUBLIC  :'public';
 
-CHAR: COMILLA(LETTER|DIGIT)COMILLA;
-STRING: COMILLA(LETTER|DIGIT)*COMILLA;
-INT : [0-9]+;
-ID : LETTER (LETTER|DIGIT)* ;
-NUM : DIGIT DIGIT* ;
-LETTER : 'a'..'z' | 'A'..'Z';
+//CHAR: COMILLA(LETTER|DIGIT)COMILLA;
+//STRING: COMILLA(LETTER|DIGIT)*COMILLA;
+//INT : [0-9]+;
+//ID : LETTER (LETTER|DIGIT)* ;
+//NUM : DIGIT DIGIT* ;
+LETTER : ('a'..'z'|'A'..'Z');
 DIGIT : '0'..'9' ;
 
 COMMENT : '<!--' .*? '-->' ;
-WS  :   [ \t\n\r]+ -> skip ;
+WS  :[ \t\n\r]+ -> skip ;
 
