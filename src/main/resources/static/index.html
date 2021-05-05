@@ -14,44 +14,42 @@
 
 <body>
 
-<form id="text">
-    <div id="textBox" contenteditable="true">
-        <p id="textoP"></p>
-    </div>
-    <div style="color:rgba(251, 252, 252);" id="consoleBox" contenteditable="false">
-        <p id="consoleP"></p>
-    </div>
-</form>
-<!-- <form id="console">
+    <form id="text">
+        <div id="textBox" contenteditable="true">
+            <p id="textoP"></p>
+        </div>
+        <div style="color:rgba(251, 252, 252);" id="consoleBox" contenteditable="false">
+            <p id="consoleP"></p>
+        </div>
+    </form>
+    <!-- <form id="console">
     <div style="color:rgba(251, 252, 252);" id="consoleBox" contenteditable="false">
         <p id="consoleP"></p>
     </div>
 </form> -->
-<input id="btn" type="button" onclick="viewData();" value="Run">
-<script type="text/javascript">
+    <input id="btn" type="button" onclick="viewData();" value="Run">
+    <script type="text/javascript">
 
-    function viewData(){
-        var data = document.getElementById("textBox").innerText;
-        console.log("viquez hp"+ data);
-        fetch('http://localhost:8080/program', {
-           method: 'POST',
-           body: data
-        })
-        .then(function(response) {
-           if(response.ok) {
-                console.log(response);
-           } else {
-               throw "Error en la llamada Ajax";
-           }
-
-        })
-        .then(function(texto) {
-           console.log(texto);
-        })
-        .catch(function(err) {
-           console.log(err);
-        });
-    }
+        function viewData() {
+            var data = document.getElementById("textBox").innerText;
+            console.log("Yeudi" + data);
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "http://localhost:8080/program",
+                data: data,
+                success: function (data) {
+                    console.log("SUCCESS: ", data);
+                    document.getElementById("consoleP").innerText = data;
+                },
+                error: function (e) {
+                    console.log("ERROR: ", e);
+                },
+                done: function (e) {
+                    console.log("DONE");
+                }
+            });
+        }
     </script>
 
 </body>
