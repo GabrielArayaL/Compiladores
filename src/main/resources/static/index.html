@@ -29,19 +29,29 @@
 </form> -->
 <input id="btn" type="button" onclick="viewData();" value="Run">
 <script type="text/javascript">
-        function viewData() {
 
-        var texto= document.getElementById('textBox').innerText;
-            console.log(texto);
-            document.getElementById("consoleP").innerHTML =
-                $.post(`http://localhost:8080/program`,{texto}, function (data, status) {
-                    console.log("entre al host 2");
-                    console.log(status);
-                    console.log("Data: " +data);
-                    document.getElementById("consoleP").innerHTML = data;
-                });
-        }
+    function viewData(){
+        var data = document.getElementById("textBox").innerText;
+        console.log("viquez hp"+ data);
+        fetch('http://localhost:8080/program', {
+           method: 'POST',
+           body: data
+        })
+        .then(function(response) {
+           if(response.ok) {
+                console.log(response);
+           } else {
+               throw "Error en la llamada Ajax";
+           }
 
+        })
+        .then(function(texto) {
+           console.log(texto);
+        })
+        .catch(function(err) {
+           console.log(err);
+        });
+    }
     </script>
 
 </body>
