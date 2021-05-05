@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.springframework.http.StreamingHttpOutputMessage;
 import org.springframework.stereotype.Service;
 
 
@@ -14,6 +15,7 @@ public class projectService {
 
     public String main(String body){
 
+        System.out.println("BODY " + body);
         generated.miScanner inst = null;
         generated.miParser parser = null;
         ParseTree tree = null;

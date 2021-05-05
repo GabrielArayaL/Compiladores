@@ -9,8 +9,9 @@ public class projectController {
     private final projectService project_service = new projectService();
 
 
-    @PostMapping("/program")
+    @PostMapping(value = "/program")
     public String program(@RequestBody String body){
+        System.out.println("BODY2 " + body);
         return project_service.main(body);
     }
 

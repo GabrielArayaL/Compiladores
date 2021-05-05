@@ -8,125 +8,125 @@ options {
 
 
 
-program : (statement)* EOF;
+program : (statement)* EOF                                                                              #programAST;
+
+
+statement   : variableDecl PYCOMA                                                                       #variableDeclCAST
+            | classDecl PYCOMA                                                                          #classDeclCAST
+            | assignment PYCOMA                                                                         #assignmentCAST
+            | arrayAssignment PYCOMA                                                                    #arrayAssignmentCAST
+            | printStatement PYCOMA                                                                     #printStatementCAST
+            | ifStatement                                                                               #ifStatementCAST
+            | whileStatement                                                                            #whileStatementCAST
+            | returnStatement PYCOMA                                                                    #returnStatementCAST
+            | functionDecl                                                                              #functionDeclCAST
+            | block                                                                                     #blockCAST;
 
 
 
-statement   : variableDecl PYCOMA
-            | classDecl PYCOMA
-            | assignment PYCOMA
-            | arrayAssignment PYCOMA
-            | printStatement PYCOMA
-            | ifStatement
-            | whileStatement
-            | returnStatement PYCOMA
-            | functionDecl
-            | block ;
+
+block: LLAVEIZQ(statement)* LLAVEDER                                                                    #blockAST;
+
+functionDecl:   type identifier PIZQ(formalParams)? PDER block                                          #functionDeclAST;
+
+formalParams:   formalParam(COMA formalParam)*                                                          #formalParamsAST;
+
+formalParam:    type identifier                                                                         #formalParamAST;
+
+whileStatement:     WHILE PIZQ expression PDER block                                                    #whileAST;
+
+ifStatement: IF PIZQ expression PDER block (ELSE block)?                                                #ifAST;
+
+returnStatement:    RETURN expression                                                                   #returnStatementAST;
+
+printStatement: PRINT expression                                                                        #printStatementAST;
+
+classDecl: CLASS identifier LLAVEIZQ(classVariableDecl)* LLAVEDER                                       #classDeclAST;
 
 
-block: LLAVEIZQ(statement)* LLAVEDER;
+classVariableDecl:  simpleType identifier(IGUAL expression)?                                            #classVariableDeclAST;
 
-functionDecl:   type identifier PIZQ(formalParams)? PDER block;
+variableDecl: type identifier (IGUAL expression)?                                                       #classVariableDec;
 
-formalParams:   formalParam(COMA formalParam)*;
-
-formalParam:    type identifier;
-
-whileStatement:     WHILE PIZQ expression PDER block;
-
-ifStatement: IF PIZQ expression PDER block (ELSE block)?;
-
-returnStatement:    RETURN expression;
-
-printStatement: PRINT expression;
-
-classDecl: CLASS identifier LLAVEIZQ(classVariableDecl)* LLAVEDER;
+type : simpleType                                                                                       #simpleTypeCAST
+      | arrayType                                                                                       #arrayTypeCAST
+      | identifier                                                                                      #identifierCAAST;
 
 
-classVariableDecl:  simpleType identifier(IGUAL expression)?;
+simpleType:  BOOLEAN                                                                                    #booleanCAST
+            | CHAR2                                                                                     #char2CAST
+            | INT2                                                                                      #int2CAST
+            | STRING2                                                                                   #string2CAST;
 
-variableDecl: type identifier (IGUAL expression)?;
-
-type : simpleType
-      | arrayType
-      | identifier;
-
-
-simpleType:  BOOLEAN
-            | CHAR2
-            | INT2
-            | STRING2;
-
-arrayType: simpleType  CORIZQ CORDER ;
+arrayType: simpleType  CORIZQ CORDER                                                                    #arrayTypeAST;
 
 
-assignment: identifier(PUNTO identifier)? IGUAL expression;
+assignment: identifier(PUNTO identifier)? IGUAL expression                                              #assignmentAST;
 
 
-arrayAssignment:    identifier CORIZQ expression CORDER IGUAL expression;
+arrayAssignment:    identifier CORIZQ expression CORDER IGUAL expression                                #arrayAssignmentAST;
 
 
-expression : simpleExpression (relationalOp simpleExpression)*;
+expression : simpleExpression (relationalOp simpleExpression)*                                          #expressionAST;
 
 
-simpleExpression: term(additiveOp term)* ;
+simpleExpression: term(additiveOp term)*                                                                #simpleExpressionAST;
 
 
-term:   factor(multiplicativeOp factor)*   ;
+term:   factor(multiplicativeOp factor)*                                                                #termAST;
 
 
-factor: literal
-        |identifier(PUNTO identifier)?
-        |functionCall
-        |arrayLookup
-        |arrayLength
-        |subExpression
-        |arrayAllocationExpression
-        |allocationExpression
-        |unary;
+factor: literal                                                                                        #literalCAST
+        |identifier(PUNTO identifier)?                                                                 #identifierCAST
+        |functionCall                                                                                  #functionCallCAST
+        |arrayLookup                                                                                   #arrayLookupCAST
+        |arrayLength                                                                                   #arrayLengthCAST
+        |subExpression                                                                                 #subExpressionCAST
+        |arrayAllocationExpression                                                                     #arrayAllocationExpressionCAST
+        |allocationExpression                                                                          #allocationExpressionCAST
+        |unary                                                                                         #unaryCAST;
 
 
-unary:  (SUM|SUB|ADMIRACION)(expression)*;
+unary:  (SUM|SUB|ADMIRACION)(expression)*                                                              #unaryAST;
 
 
-allocationExpression:   NEW identifier PIZQ PDER;
+allocationExpression:   NEW identifier PIZQ PDER                                                       #allocationExpressionAST;
 
-arrayAllocationExpression:  NEW simpleType CORIZQ expression CORDER;
+arrayAllocationExpression:  NEW simpleType CORIZQ expression CORDER                                    #arrayAllocationExpressionAST;
 
-subExpression:  PIZQ expression PDER;
+subExpression:  PIZQ expression PDER                                                                   #subExpressionAST;
 
-functionCall:   identifier PIZQ(actualParms)?PDER;
+functionCall:   identifier PIZQ(actualParms)?PDER                                                      #functionCallAST;
 
 
-actualParms:    expression (COMA expression)*;
+actualParms:    expression (COMA expression)*                                                          #actualParmsAST;
 
-arrayLookup:    identifier CORIZQ(expression)CORDER;
+arrayLookup:    identifier CORIZQ(expression)CORDER                                                    #arrayLookupAST;
 
-arrayLength:    identifier PUNTO LENGTH;
+arrayLength:    identifier PUNTO LENGTH                                                                #arrayLengthAST;
 
-relationalOp: MAYOR|MENOR|MAYORI|MENORI|DIFERENTE|DOBIGUAL;
+relationalOp: MAYOR|MENOR|MAYORI|MENORI|DIFERENTE|DOBIGUAL                                             #relationalOpAST;
 
-additiveOp: SUM|SUB|OR;
+additiveOp: SUM|SUB|OR                                                                                 #additiveOpAST;
 
-multiplicativeOp: MUL|DIV|AMPERSAND;
+multiplicativeOp: MUL|DIV|AMPERSAND                                                                    #multiplicativeOpAST;
 
 //identifier: ID;
-identifier: (GUIONBAJO|LETTER)(GUIONBAJO|LETTER|DIGIT)*;
+identifier: (GUIONBAJO|LETTER)(GUIONBAJO|LETTER|DIGIT)*                                                #identifierAST;
 
 literal: intLiteral
             |realLiteral
             |boolLiteral
             |stringLiteral;
 
-intLiteral:     DIGIT(DIGIT)*;
+intLiteral:     DIGIT(DIGIT)*                                                                         #intLiteralAST;
 
 
-realLiteral:    DIGIT(DIGIT)*PUNTO(DIGIT)*
-                |PUNTO DIGIT(DIGIT)*;
+realLiteral:    DIGIT(DIGIT)*PUNTO(DIGIT)*|PUNTO DIGIT(DIGIT)*;
 
-boolLiteral: TRUE|FALSE;
+boolLiteral: TRUE|FALSE                                                                               #boolLiteralAST;
 
-stringLiteral:  COMILLA(printable)*COMILLA;
+stringLiteral:  COMILLA(printable)*COMILLA                                                            #stringLiteralAST;
 
 
 
@@ -168,7 +168,7 @@ printable:    DIGIT
             | GUIONBAJO
             | LLAVEIZQ
             | LLAVEDER
-            | OR;
+            | OR                                                                                      #printableAST;
 
 
 

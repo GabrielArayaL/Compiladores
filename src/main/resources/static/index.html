@@ -2,6 +2,19 @@
 <html lang="en">
 
 <head>
+
+
+
+
+
+
+
+
+
+
+
+
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,36 +27,35 @@
 
 <body>
 
-<form id="text">
-    <div id="textBox" contenteditable="true">
-        <p id="textoP"></p>
-    </div>
-    <div style="color:rgba(251, 252, 252);" id="consoleBox" contenteditable="false">
-        <p id="consoleP"></p>
-    </div>
-</form>
-<!-- <form id="console">
+    <form id="text">
+        <div id="textBox" contenteditable="true">
+            <p id="textoP"></p>
+        </div>
+        <div style="color:rgba(251, 252, 252);" id="consoleBox" contenteditable="false">
+            <p id="consoleP"></p>
+        </div>
+    </form>
+    <!-- <form id="console">
     <div style="color:rgba(251, 252, 252);" id="consoleBox" contenteditable="false">
         <p id="consoleP"></p>
     </div>
 </form> -->
-<input id="btn" type="button" onclick="viewData();" value="Run">
-<script type="text/javascript">
+    <input id="btn" type="button" onclick="viewData();" value="Run">
+    <script type="text/javascript">
         function viewData() {
 
-        var texto= document.getElementById('textBox').innerText;
+            var texto = document.getElementById('textBox').innerText;
             console.log(texto);
             document.getElementById("consoleP").innerHTML =
-                $.post(`http://localhost:8080/program`,{texto}, function (data, status) {
+                $.post(`http://localhost:8080/program`, document.getElementById('textBox').innerText, function (data, status) {
                     console.log("entre al host 2");
                     console.log(status);
-                    console.log("Data: " +data);
+                    console.log("Data: " + data);
                     document.getElementById("consoleP").innerHTML = data;
                 });
         }
 
     </script>
-
 </body>
 
 </html>
