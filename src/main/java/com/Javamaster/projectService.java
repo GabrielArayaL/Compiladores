@@ -39,6 +39,8 @@ public class projectService {
 
         try {
             tree = parser.program();
+            AContextual ac = new AContextual();
+            ac.visit(tree);
             System.out.println("entre aqui xd");
 
         }catch(RecognitionException e){

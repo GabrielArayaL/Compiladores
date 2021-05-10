@@ -1,4 +1,4 @@
-// Generated from C:/Users/Admin/Desktop/Proyecto Compi/Compiladores/src/main/java/com/Javamaster\miScanner.g4 by ANTLR 4.9.1
+// Generated from C:/Users/gabri/OneDrive/Escritorio/Proyecto Compi/Compiladores/src/main/java/com/Javamaster\miScanner.g4 by ANTLR 4.9.1
 package com.Javamaster;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;

@@ -44,7 +44,7 @@ printStatement: PRINT expression                                                
 classDecl: CLASS identifier LLAVEIZQ(classVariableDecl)* LLAVEDER                                       #classDeclAST;
 
 
-classVariableDecl:  simpleType identifier(IGUAL expression)?                                            #classVariableDeclAST;
+classVariableDecl:  simpleType identifier(IGUAL expression)? PYCOMA                                     #classVariableDeclAST;
 
 variableDecl: type identifier (IGUAL expression)?                                                       #classVariableDec;
 
@@ -112,17 +112,20 @@ additiveOp: SUM|SUB|OR                                                          
 multiplicativeOp: MUL|DIV|AMPERSAND                                                                    #multiplicativeOpAST;
 
 //identifier: ID;
-identifier: (GUIONBAJO|LETTER)(GUIONBAJO|LETTER|DIGIT)*                                                #identifierAST;
+identifier
+ locals [localsParserRuleContext decl=null]
+: (GUIONBAJO|LETTER)(GUIONBAJO|LETTER|DIGIT)*                                                #identifierAST;
 
-literal: intLiteral
-            |realLiteral
-            |boolLiteral
-            |stringLiteral;
+literal: intLiteral                                                                                    #intLiteralLAST
+        |realLiteral                                                                                   #realLiteralLAST
+        |boolLiteral                                                                                   #boolLiteralLAST
+        |stringLiteral                                                                                 #stringLiteralLAST;
 
 intLiteral:     DIGIT(DIGIT)*                                                                         #intLiteralAST;
 
 
-realLiteral:    DIGIT(DIGIT)*PUNTO(DIGIT)*|PUNTO DIGIT(DIGIT)*;
+realLiteral:    DIGIT(DIGIT)*PUNTO(DIGIT)*                                                            #realLiteral1AST
+                |PUNTO DIGIT(DIGIT)*                                                                  #realLiteral2AST;
 
 boolLiteral: TRUE|FALSE                                                                               #boolLiteralAST;
 
