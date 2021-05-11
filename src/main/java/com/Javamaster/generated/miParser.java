@@ -2299,7 +2299,6 @@ public class miParser extends Parser {
 	}
 
 	public static class IdentifierContext extends ParserRuleContext {
-		public localsParserRuleContext decl = null;
 		public IdentifierContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2308,7 +2307,6 @@ public class miParser extends Parser {
 		public IdentifierContext() { }
 		public void copyFrom(IdentifierContext ctx) {
 			super.copyFrom(ctx);
-			this.decl = ctx.decl;
 		}
 	}
 	public static class IdentifierASTContext extends IdentifierContext {

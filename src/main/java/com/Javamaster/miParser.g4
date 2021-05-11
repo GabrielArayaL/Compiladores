@@ -113,7 +113,7 @@ multiplicativeOp: MUL|DIV|AMPERSAND                                             
 
 //identifier: ID;
 identifier
- locals [localsParserRuleContext decl=null]
+//locals [localsParserRuleContext decl=null]
 : (GUIONBAJO|LETTER)(GUIONBAJO|LETTER|DIGIT)*                                                #identifierAST;
 
 literal: intLiteral                                                                                    #intLiteralLAST
