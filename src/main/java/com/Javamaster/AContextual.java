@@ -20,7 +20,7 @@ public class AContextual extends miParserBaseVisitor {
     @Override
     public Object visitVariableDeclCAST(miParser.VariableDeclCASTContext ctx) {
 
-        miParser.TypeContext typToken;
+        miParser.SimpleTypeCASTContext typToken;
         miParser.IdentifierASTContext idToken = (miParser.IdentifierASTContext) this.visit(ctx.variableDecl());
 
         return null;
