@@ -41,7 +41,6 @@ public class projectService {
             tree = parser.program();
             AContextual ac = new AContextual();
             ac.visit(tree);
-            System.out.println("entre aqui xd");
 
         }catch(RecognitionException e){
             System.out.println("Error!!!");

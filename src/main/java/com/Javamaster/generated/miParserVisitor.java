@@ -42,7 +42,7 @@ public interface miParserVisitor<T> extends ParseTreeVisitor<T>{
 
     T visitPrintStatementAST(generated.miParser.PrintStatementASTContext ctx);
 
-    T visitClassDeclAST(generated.miParser.ClassDeclCASTContext ctx);
+    T visitClassDeclAST(generated.miParser.ClassDeclASTContext ctx);
 
     T visitClassVariableDeclAST(generated.miParser.ClassVariableDeclASTContext ctx);
 

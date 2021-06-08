@@ -83,7 +83,7 @@ public class miParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implemen
         return visitChildren(ctx);
     }
     @Override
-    public T visitClassDeclAST(miParser.ClassDeclCASTContext ctx) {
+    public T visitClassDeclAST(miParser.ClassDeclASTContext ctx) {
         return visitChildren(ctx);
     }
     @Override

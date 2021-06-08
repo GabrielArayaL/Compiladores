@@ -7,7 +7,7 @@ public class AContextual extends miParserBaseVisitor {
    private TablaSimbolos tabla;
   public AContextual() {
       tabla = new TablaSimbolos();
-      //tabla.insertar(new CommonToken(miParser.ID,"print"),-1,null);
+      tabla.insertar(new CommonToken(miParser.RULE_identifier,"print"),-1,null);
   }
 
     @Override
@@ -19,330 +19,554 @@ public class AContextual extends miParserBaseVisitor {
 
     @Override
     public Object visitVariableDeclCAST(miParser.VariableDeclCASTContext ctx) {
-
-        miParser.SimpleTypeCASTContext typToken;
-        miParser.IdentifierASTContext idToken = (miParser.IdentifierASTContext) this.visit(ctx.variableDecl());
-
+        this.visit(ctx.variableDecl());
+        this.visit(ctx.PYCOMA());
         return null;
     }
 
     @Override
     public Object visitClassDeclCAST(miParser.ClassDeclCASTContext ctx) {
-        return super.visitClassDeclCAST(ctx);
+        this.visit(ctx.classDecl());
+        this.visit(ctx.PYCOMA());
+        return null;
     }
 
     @Override
     public Object visitAssignmentCAST(miParser.AssignmentCASTContext ctx) {
-        return super.visitAssignmentCAST(ctx);
+        this.visit(ctx.assignment());
+        this.visit(ctx.PYCOMA());
+        return null;
     }
 
     @Override
     public Object visitArrayAssignmentCAST(miParser.ArrayAssignmentCASTContext ctx) {
-        return super.visitArrayAssignmentCAST(ctx);
+        this.visit(ctx.arrayAssignment());
+        this.visit(ctx.PYCOMA());
+        return null;
     }
 
     @Override
     public Object visitPrintStatementCAST(miParser.PrintStatementCASTContext ctx) {
-        return super.visitPrintStatementCAST(ctx);
+        this.visit(ctx.printStatement());
+        this.visit(ctx.PYCOMA());
+        return null;
     }
 
     @Override
     public Object visitIfStatementCAST(miParser.IfStatementCASTContext ctx) {
-        return super.visitIfStatementCAST(ctx);
+        this.visit(ctx.ifStatement());
+        return null;
     }
 
     @Override
     public Object visitWhileStatementCAST(miParser.WhileStatementCASTContext ctx) {
-        return super.visitWhileStatementCAST(ctx);
+        this.visit(ctx.whileStatement());
+        return null;
     }
 
     @Override
     public Object visitReturnStatementCAST(miParser.ReturnStatementCASTContext ctx) {
-        return super.visitReturnStatementCAST(ctx);
+        this.visit(ctx.returnStatement());
+        this.visit(ctx.PYCOMA());
+        return null;
     }
 
     @Override
     public Object visitFunctionDeclCAST(miParser.FunctionDeclCASTContext ctx) {
-        return super.visitFunctionDeclCAST(ctx);
+        this.visit(ctx.functionDecl());
+        return null;
     }
 
     @Override
     public Object visitBlockCAST(miParser.BlockCASTContext ctx) {
-        return super.visitBlockCAST(ctx);
+        this.visit(ctx.block());
+        return null;
     }
 
     @Override
     public Object visitBlockAST(miParser.BlockASTContext ctx) {
-        return super.visitBlockAST(ctx);
+        this.visit(ctx.LLAVEIZQ());
+        for(miParser.StatementContext c : ctx.statement())
+            this.visit(c);
+        this.visit(ctx.LLAVEDER());
+        return null;
     }
 
     @Override
     public Object visitFunctionDeclAST(miParser.FunctionDeclASTContext ctx) {
-        return super.visitFunctionDeclAST(ctx);
+        miParser.TypeContext typeToken = (miParser.TypeContext) this.visit(ctx.type());
+        miParser.IdentifierContext idToken = (miParser.IdentifierContext) this.visit(ctx.identifier());
+        miParser.FormalParamContext formalPToken = (miParser.FormalParamContext) this.visit(ctx.formalParams());
+        miParser.BlockContext blockToken = (miParser.BlockContext) this.visit(ctx.block());
+
+        TablaSimbolos.Ident type = tabla.buscar(typeToken.getToken(miParser.RULE_simpleType,0).getText());
+        TablaSimbolos.Ident id = tabla.buscar(idToken.getToken(miParser.RULE_identifier,0).getText());
+        TablaSimbolos.Ident formalP = tabla.buscar(formalPToken.getToken(miParser.RULE_expression,0).getText());
+        TablaSimbolos.Ident block = tabla.buscar(blockToken.getToken(miParser.RULE_block,0).getText());
+
+        if(type!=null){
+            if(id!=null){
+                if(formalP!=null){
+                    if(block!=null){
+                        this.visit(ctx.type());
+                        this.visit(ctx.identifier());
+                        this.visit(ctx.PIZQ());
+                        this.visit(ctx.formalParams());
+                        this.visit(ctx.PDER());
+                        this.visit(ctx.block());
+                    }
+                }
+            }
+
+        }
+        return null;
     }
 
     @Override
     public Object visitFormalParamsAST(miParser.FormalParamsASTContext ctx) {
-        return super.visitFormalParamsAST(ctx);
+        this.visit(ctx.formalParam(0));
+        this.visit(ctx.COMA(0));
+        this.visit(ctx.formalParam(1));
+        return null;
     }
 
     @Override
     public Object visitFormalParamAST(miParser.FormalParamASTContext ctx) {
-        return super.visitFormalParamAST(ctx);
+        this.visit(ctx.type());
+        this.visit(ctx.identifier());
+        return null;
     }
 
     @Override
     public Object visitWhileAST(miParser.WhileASTContext ctx) {
-        return super.visitWhileAST(ctx);
+        this.visit(ctx.WHILE());
+        this.visit(ctx.PIZQ());
+        this.visit(ctx.expression());
+        this.visit(ctx.PDER());
+        this.visit(ctx.block());
+        return null;
     }
 
     @Override
     public Object visitIfAST(miParser.IfASTContext ctx) {
-        return super.visitIfAST(ctx);
+        this.visit(ctx.IF());
+        this.visit(ctx.PIZQ());
+        this.visit(ctx.expression());
+        this.visit(ctx.PDER());
+        this.visit(ctx.block(0));
+        this.visit(ctx.ELSE());
+        this.visit(ctx.block(1));
+        return null;
     }
 
     @Override
     public Object visitReturnStatementAST(miParser.ReturnStatementASTContext ctx) {
-        return super.visitReturnStatementAST(ctx);
+        this.visit(ctx.RETURN());
+        this.visit(ctx.expression());
+        return null;
     }
 
     @Override
     public Object visitPrintStatementAST(miParser.PrintStatementASTContext ctx) {
-        return super.visitPrintStatementAST(ctx);
+        this.visit(ctx.PRINT());
+        this.visit(ctx.expression());
+        return null;
     }
 
     @Override
-    public Object visitClassDeclAST(miParser.ClassDeclCASTContext ctx) {
-        return super.visitClassDeclAST(ctx);
+    public Object visitClassDeclAST(miParser.ClassDeclASTContext ctx) {
+        this.visit(ctx.CLASS());
+        this.visit(ctx.identifier());
+        this.visit(ctx.LLAVEIZQ());
+        this.visit(ctx.classVariableDecl(0));
+        this.visit(ctx.LLAVEDER());
+        return null;
     }
 
     @Override
     public Object visitClassVariableDeclAST(miParser.ClassVariableDeclASTContext ctx) {
-        return super.visitClassVariableDeclAST(ctx);
+        this.visit(ctx.simpleType());
+        this.visit(ctx.identifier());
+        this.visit(ctx.IGUAL());
+        this.visit(ctx.expression());
+        this.visit(ctx.PYCOMA());
+        return null;
     }
 
     @Override
     public Object visitClassVariableDec(miParser.ClassVariableDecContext ctx) {
-        return super.visitClassVariableDec(ctx);
+        this.visit(ctx.type());
+        this.visit(ctx.identifier());
+        this.visit(ctx.IGUAL());
+        this.visit(ctx.expression());
+        return null;
     }
 
     @Override
     public Object visitSimpleTypeCAST(miParser.SimpleTypeCASTContext ctx) {
-        return super.visitSimpleTypeCAST(ctx);
+        this.visit(ctx.simpleType());
+        return null;
     }
 
     @Override
     public Object visitArrayTypeCAST(miParser.ArrayTypeCASTContext ctx) {
-        return super.visitArrayTypeCAST(ctx);
+        this.visit(ctx.arrayType());
+        return null;
     }
 
     @Override
     public Object visitIdentifierCAAST(miParser.IdentifierCAASTContext ctx) {
-        return super.visitIdentifierCAAST(ctx);
+        this.visit(ctx.identifier());
+        return null;
     }
 
     @Override
     public Object visitBooleanCAST(miParser.BooleanCASTContext ctx) {
-        return super.visitBooleanCAST(ctx);
+        this.visit(ctx.BOOLEAN());
+        return null;
     }
 
     @Override
     public Object visitChar2CAST(miParser.Char2CASTContext ctx) {
-        return super.visitChar2CAST(ctx);
+        this.visit(ctx.CHAR2());
+        return null;
     }
 
     @Override
     public Object visitInt2CAST(miParser.Int2CASTContext ctx) {
-        return super.visitInt2CAST(ctx);
+        this.visit(ctx.INT2());
+        return null;
     }
 
     @Override
     public Object visitString2CAST(miParser.String2CASTContext ctx) {
-        return super.visitString2CAST(ctx);
+        this.visit(ctx.STRING2());
+        return null;
     }
 
     @Override
     public Object visitArrayTypeAST(miParser.ArrayTypeASTContext ctx) {
-        return super.visitArrayTypeAST(ctx);
+        this.visit(ctx.simpleType());
+        this.visit(ctx.CORIZQ());
+        this.visit(ctx.CORDER());
+        return null;
     }
 
     @Override
     public Object visitAssignmentAST(miParser.AssignmentASTContext ctx) {
-        return super.visitAssignmentAST(ctx);
+        this.visit(ctx.identifier(0));
+        this.visit(ctx.PUNTO());
+        this.visit(ctx.identifier(1));
+        this.visit(ctx.IGUAL());
+        this.visit(ctx.expression());
+        return null;
     }
 
     @Override
     public Object visitArrayAssignmentAST(miParser.ArrayAssignmentASTContext ctx) {
-        return super.visitArrayAssignmentAST(ctx);
+        this.visit(ctx.identifier());
+        this.visit(ctx.CORIZQ());
+        this.visit(ctx.expression(0));
+        this.visit(ctx.CORDER());
+        this.visit(ctx.IGUAL());
+        this.visit(ctx.expression(1));
+        return null;
     }
-
     @Override
     public Object visitExpressionAST(miParser.ExpressionASTContext ctx) {
-        return super.visitExpressionAST(ctx);
+        this.visit(ctx.simpleExpression(0));
+        this.visit(ctx.relationalOp(0));
+        this.visit(ctx.simpleExpression(1));
+        return null;
     }
-
     @Override
     public Object visitSimpleExpressionAST(miParser.SimpleExpressionASTContext ctx) {
-        return super.visitSimpleExpressionAST(ctx);
+        this.visit(ctx.term(0));
+        this.visit(ctx.additiveOp(0));
+        this.visit(ctx.term(1));
+        return null;
     }
 
     @Override
     public Object visitTermAST(miParser.TermASTContext ctx) {
-        return super.visitTermAST(ctx);
+        this.visit(ctx.factor(0));
+        this.visit(ctx.multiplicativeOp(0));
+        this.visit(ctx.factor(1));
+        return null;
     }
 
     @Override
     public Object visitLiteralCAST(miParser.LiteralCASTContext ctx) {
-        return super.visitLiteralCAST(ctx);
+        this.visit(ctx.literal());
+        return null;
     }
 
     @Override
     public Object visitIdentifierCAST(miParser.IdentifierCASTContext ctx) {
-        return super.visitIdentifierCAST(ctx);
+        this.visit(ctx.identifier(0));
+        this.visit(ctx.PUNTO());
+        this.visit(ctx.identifier(1));
+        return null;
     }
 
     @Override
     public Object visitFunctionCallCAST(miParser.FunctionCallCASTContext ctx) {
-        return super.visitFunctionCallCAST(ctx);
+        this.visit(ctx.functionCall());
+        return null;
     }
 
     @Override
     public Object visitArrayLookupCAST(miParser.ArrayLookupCASTContext ctx) {
-        return super.visitArrayLookupCAST(ctx);
+        this.visit(ctx.arrayLookup());
+        return null;
     }
 
     @Override
     public Object visitArrayLengthCAST(miParser.ArrayLengthCASTContext ctx) {
-        return super.visitArrayLengthCAST(ctx);
+        this.visit(ctx.arrayLength());
+        return null;
     }
 
     @Override
     public Object visitSubExpressionCAST(miParser.SubExpressionCASTContext ctx) {
-        return super.visitSubExpressionCAST(ctx);
+        this.visit(ctx.subExpression());
+        return null;
     }
 
     @Override
     public Object visitArrayAllocationExpressionCAST(miParser.ArrayAllocationExpressionCASTContext ctx) {
-        return super.visitArrayAllocationExpressionCAST(ctx);
+        this.visit(ctx.arrayAllocationExpression());
+        return null;
     }
 
     @Override
     public Object visitAllocationExpressionCAST(miParser.AllocationExpressionCASTContext ctx) {
-        return super.visitAllocationExpressionCAST(ctx);
+        this.visit(ctx.allocationExpression());
+        return null;
     }
 
     @Override
     public Object visitUnaryCAST(miParser.UnaryCASTContext ctx) {
-        return super.visitUnaryCAST(ctx);
+        this.visit(ctx.unary());
+        return null;
     }
 
     @Override
     public Object visitUnaryAST(miParser.UnaryASTContext ctx) {
-        return super.visitUnaryAST(ctx);
+        this.visit(ctx.SUM());
+        this.visit(ctx.SUB());
+        this.visit(ctx.ADMIRACION());
+        this.visit(ctx.expression(0));
+        return null;
     }
 
     @Override
     public Object visitAllocationExpressionAST(miParser.AllocationExpressionASTContext ctx) {
-        return super.visitAllocationExpressionAST(ctx);
+        this.visit(ctx.NEW());
+        this.visit(ctx.identifier());
+        this.visit(ctx.PIZQ());
+        this.visit(ctx.PDER());
+        return null;
     }
 
     @Override
     public Object visitArrayAllocationExpressionAST(miParser.ArrayAllocationExpressionASTContext ctx) {
-        return super.visitArrayAllocationExpressionAST(ctx);
+        this.visit(ctx.NEW());
+        this.visit(ctx.simpleType());
+        this.visit(ctx.CORIZQ());
+        this.visit(ctx.expression());
+        this.visit(ctx.CORDER());
+        return null;
     }
 
     @Override
     public Object visitSubExpressionAST(miParser.SubExpressionASTContext ctx) {
-        return super.visitSubExpressionAST(ctx);
+        this.visit(ctx.PIZQ());
+        this.visit(ctx.expression());
+        this.visit(ctx.PDER());
+        return null;
     }
 
     @Override
     public Object visitFunctionCallAST(miParser.FunctionCallASTContext ctx) {
-        return super.visitFunctionCallAST(ctx);
+        this.visit(ctx.identifier());
+        this.visit(ctx.PIZQ());
+        this.visit(ctx.actualParms());
+        this.visit(ctx.PDER());
+        return null;
     }
 
     @Override
     public Object visitActualParmsAST(miParser.ActualParmsASTContext ctx) {
-        return super.visitActualParmsAST(ctx);
+        this.visit(ctx.expression(0));
+        this.visit(ctx.COMA(0));
+        this.visit(ctx.expression(1));
+        return null;
     }
 
     @Override
     public Object visitArrayLookupAST(miParser.ArrayLookupASTContext ctx) {
-        return super.visitArrayLookupAST(ctx);
+        this.visit(ctx.identifier());
+        this.visit(ctx.CORIZQ());
+        this.visit(ctx.expression());
+        this.visit(ctx.CORDER());
+        return null;
     }
 
     @Override
     public Object visitArrayLengthAST(miParser.ArrayLengthASTContext ctx) {
-        return super.visitArrayLengthAST(ctx);
+        this.visit(ctx.identifier());
+        this.visit(ctx.PUNTO());
+        this.visit(ctx.LENGTH());
+        return null;
     }
 
     @Override
     public Object visitRelationalOpAST(miParser.RelationalOpContext ctx) {
-        return super.visitRelationalOpAST(ctx);
+        this.visit(ctx.MAYOR());
+        this.visit(ctx.MENOR());
+        this.visit(ctx.MAYORI());
+        this.visit(ctx.MENORI());
+        this.visit(ctx.DIFERENTE());
+        this.visit(ctx.DOBIGUAL());
+        return null;
     }
 
     @Override
     public Object visitAdditiveOpAST(miParser.AdditiveOpContext ctx) {
-        return super.visitAdditiveOpAST(ctx);
+        this.visit(ctx.SUB());
+        this.visit(ctx.SUM());
+        this.visit(ctx.OR());
+        return null;
     }
 
     @Override
     public Object visitMultiplicativeOpAST(miParser.MultiplicativeOpContext ctx) {
-        return super.visitMultiplicativeOpAST(ctx);
+        this.visit(ctx.MUL());
+        this.visit(ctx.DIV());
+        this.visit(ctx.AMPERSAND());
+        return null;
     }
 
     @Override
     public Object visitIdentifierAST(miParser.IdentifierASTContext ctx) {
-        return super.visitIdentifierAST(ctx);
+        this.visit(ctx.GUIONBAJO(0));
+        this.visit(ctx.LETTER(0));
+        this.visit(ctx.GUIONBAJO(1));
+        this.visit(ctx.LETTER(1));
+        this.visit(ctx.DIGIT(0));
+        return null;
     }
 
     @Override
     public Object visitIntLiteralLAST(miParser.IntLiteralLASTContext ctx) {
-        return super.visitIntLiteralLAST(ctx);
+        this.visit(ctx.intLiteral());
+        return null;
     }
 
     @Override
     public Object visitRealLiteralLAST(miParser.RealLiteralLASTContext ctx) {
-        return super.visitRealLiteralLAST(ctx);
+        this.visit(ctx.realLiteral());
+        return null;
     }
 
     @Override
     public Object visitBoolLiteralLAST(miParser.BoolLiteralLASTContext ctx) {
-        return super.visitBoolLiteralLAST(ctx);
+        this.visit(ctx.boolLiteral());
+        return null;
     }
 
     @Override
     public Object visitStringLiteralLAST(miParser.StringLiteralLASTContext ctx) {
-        return super.visitStringLiteralLAST(ctx);
+        this.visit(ctx.stringLiteral());
+        return null;
     }
 
     @Override
     public Object visitIntLiteralAST(miParser.IntLiteralASTContext ctx) {
-        return super.visitIntLiteralAST(ctx);
+        this.visit(ctx.DIGIT(0));
+        this.visit(ctx.DIGIT(1));
+        return null;
     }
 
     @Override
     public Object visitRealLiteral1AST(miParser.RealLiteral1ASTContext ctx) {
-        return super.visitRealLiteral1AST(ctx);
+        this.visit(ctx.DIGIT(0));
+        this.visit(ctx.DIGIT(1));
+        this.visit(ctx.PUNTO());
+        this.visit(ctx.DIGIT(2));
+        return null;
     }
 
     @Override
     public Object visitRealLiteral2AST(miParser.RealLiteral2ASTContext ctx) {
-        return super.visitRealLiteral2AST(ctx);
+        this.visit(ctx.PUNTO());
+        this.visit(ctx.DIGIT(0));
+        this.visit(ctx.DIGIT(1));
+        return null;
     }
 
     @Override
     public Object visitBoolLiteralAST(miParser.BoolLiteralContext ctx) {
-        return super.visitBoolLiteralAST(ctx);
+        this.visit(ctx.TRUE());
+        this.visit(ctx.FALSE());
+        return null;
     }
 
     @Override
     public Object visitStringLiteralAST(miParser.StringLiteralASTContext ctx) {
-        return super.visitStringLiteralAST(ctx);
+        this.visit(ctx.COMILLA(0));
+        this.visit(ctx.printable(0));
+        this.visit(ctx.COMILLA(0));
+        return null;
     }
 
     @Override
     public Object visitPrintableAST(miParser.PrintableContext ctx) {
-        return super.visitPrintableAST(ctx);
+        this.visit(ctx.DIGIT());
+        this.visit(ctx.LETTER());
+        this.visit(ctx.PYCOMA());
+        this.visit(ctx.ASSIGN());
+        this.visit(ctx.IGUAL());
+        this.visit(ctx.PIZQ());
+
+        this.visit(ctx.PDER());
+        this.visit(ctx.VIR());
+        this.visit(ctx.DOSPUN());
+        this.visit(ctx.SUM());
+        this.visit(ctx.SUB());
+
+        this.visit(ctx.MUL());
+        this.visit(ctx.DIV());
+        this.visit(ctx.COMILLA());
+        this.visit(ctx.COMILLAD());
+
+        this.visit(ctx.MAYOR());
+        this.visit(ctx.MENOR());
+        this.visit(ctx.MAYORI());
+        this.visit(ctx.MENORI());
+
+        this.visit(ctx.DOBIGUAL());
+        this.visit(ctx.DIFERENTE());
+        this.visit(ctx.ADMIRACION());
+        this.visit(ctx.NUMERAL());
+        this.visit(ctx.DOLAR());
+        this.visit(ctx.PORCENTAJE());
+        this.visit(ctx.AMPERSAND());
+
+        this.visit(ctx.COMA());
+        this.visit(ctx.PUNTO());
+        this.visit(ctx.SIGPREGUNTA());
+        this.visit(ctx.ARROBA());
+        this.visit(ctx.CORIZQ());
+        this.visit(ctx.CORDER());
+
+        this.visit(ctx.BACKSLASH());
+        this.visit(ctx.CIRCUNFLEJO());
+        this.visit(ctx.GUIONBAJO());
+        this.visit(ctx.LLAVEIZQ());
+        this.visit(ctx.LLAVEDER());
+        this.visit(ctx.OR());
+        return null;
     }
 }
